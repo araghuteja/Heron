@@ -1,5 +1,5 @@
 import React from 'react'
-import { navigate } from 'hookrouter';
+import { useHistory } from "react-router-dom";
 import {getRandomNumbers} from '../../Utilities/RandomNumberGenerator'
 
 class Game extends React.Component {
@@ -17,10 +17,12 @@ class Game extends React.Component {
     }
 
     render() {
+        const history = useHistory();
+
         return (
             <div className="Game">
                 <h1>Game</h1>
-                <button onClick={() => navigate('/')}>Main Menu</button>
+                <button onClick={() => history.push("/")}>Main Menu</button>
 
                 {/*<hr/>
                 <span>{this.state.includeNegatives.toString()}</span>

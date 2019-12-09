@@ -1,6 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {useRoutes, navigate} from 'hookrouter';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    useHistory } from "react-router-dom";
 
 import About from "./Components/About/About";
 import Game from "./Components/Game/Game";
@@ -10,27 +14,43 @@ import Options from "./Components/Options/Options";
 import StartMenu from "./Components/StartMenu/StartMenu";
 import Scoreboard from "./Components/Scoreboard/Scoreboard";
 
-
-const routes = {
-    '/': () => <MainMenu />,
-    '/start': () => <StartMenu />,
-    '/game/:options*': () => ({options}) => <Game options={options} />,
-    '/scoreboard': () => <Scoreboard />,
-    '/options': () => <Options />,
-    '/about': () => <About />
-};
-
 let initialLoad = true;
 
 const App = () => {
-    const routeResult = useRoutes(routes);
+    const history = useHistory();
 
     if (initialLoad) {
+        history.push('/');
         initialLoad = false;
-        navigate('/');
     }
 
-    return routeResult || <NotFound />;
+    return (
+        <Router>
+            <Switch>
+                <Route path="/" exact>
+                    <MainMenu />
+                </Route>
+                <Route path="/start">
+                    <StartMenu />
+                </Route>
+                <Route path="/game">
+                    <Game />
+                </Route>
+                <Route path="/scoreboard">
+                    <Scoreboard />
+                </Route>
+                <Route path="/options">
+                    <Options />
+                </Route>
+                <Route path="/about">
+                    <About />
+                </Route>
+                <Route path="*">
+                    <NotFound />
+                </Route>
+            </Switch>
+        </Router>
+    )
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))

@@ -1,13 +1,15 @@
 import React from 'react'
-import { navigate } from 'hookrouter';
+import { useHistory } from "react-router-dom";
 
 class Scoreboard extends React.Component {
 
     render() {
+        const history = useHistory();
+
         return (
             <div className="Scoreboard">
                 <h1>Score Board</h1>
-                <button onClick={() => navigate('/')}>Main Menu</button>
+                <button onClick={() => history.push('/')}>Main Menu</button>
             </div>
         );
 

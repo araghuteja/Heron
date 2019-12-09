@@ -1,16 +1,17 @@
 import React from 'react'
 import heroOfAlexandria from '../../Assets/Hero_of_Alexandria.png';
-import { navigate } from 'hookrouter';
+import { useHistory } from "react-router-dom";
 
 class About extends React.Component {
+    
 
     render() {
-        console.log(window.history)
+        const history = useHistory();
 
         return (
             <div className="About">
                 <h1>About</h1>
-                <button onClick={() => navigate('/')}>Main Menu</button>
+                <button onClick={() => history.push("/")}>Main Menu</button>
                 <hr/>
                 <img src={heroOfAlexandria} alt={'Hero of Alexandria'}/>
                 <h2>From Wikipedia</h2>
